@@ -500,7 +500,7 @@
 
         <div class="note" id="ruleNote">
           <strong>Not</strong>
-          <span>2200 ve altındaki değerlerde seçili formül kullanılır. 2200'den yüksek değerlerde Chess.com puanı Lichess'ten 100 ELO yüksek kabul edilir.</span>
+          <span>2200 ve altındaki değerlerde seçili formül kullanılır. 2200'den yüksek değerlerde Lichess puanı Chess.com'dan 100 ELO yüksek kabul edilir.</span>
         </div>
       </div>
     </section>
@@ -540,9 +540,11 @@
 
     function convertElo(platform, elo) {
       if (platform === "lichess") {
+        // Lichess -> Chess.com
         return elo > 2200 ? elo - 100 : (1.11 * elo) - 400;
       }
 
+      // Chess.com -> Lichess
       return elo > 2200 ? elo + 100 : (0.90 * elo) + 360;
     }
 
@@ -569,7 +571,7 @@
       explanation.textContent = `${elo.toLocaleString("tr-TR")} ${sourceName} ELO yaklaşık ${converted.toLocaleString("tr-TR")} ${targetName} ELO eder.`;
 
       if (elo > 2200) {
-        ruleNote.innerHTML = "<strong>Not</strong><span>2200'den sonra fark sabitlenir: Chess.com, Lichess'ten 100 ELO daha büyük kabul edilir.</span>";
+        ruleNote.innerHTML = "<strong>Not</strong><span>2200'den sonra fark sabitlenir: Lichess, Chess.com'dan 100 ELO daha büyük kabul edilir.</span>";
       } else {
         const formula = platform === "lichess" ? "(1.11 x Lichess) - 400" : "(0.90 x Chess.com) + 360";
         ruleNote.innerHTML = `<strong>Formül</strong><span>${formula} kullanıldı. 2200'den sonra sabit 100 ELO farkına geçilir.</span>`;
