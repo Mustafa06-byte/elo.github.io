@@ -540,10 +540,10 @@
 
     function convertElo(platform, elo) {
       if (platform === "lichess") {
-        return elo > 2200 ? elo + 100 : (1.11 * elo) - 400;
+        return elo > 2200 ? elo - 100 : (1.11 * elo) - 400;
       }
 
-      return elo > 2200 ? elo - 100 : (0.90 * elo) + 360;
+      return elo > 2200 ? elo + 100 : (0.90 * elo) + 360;
     }
 
     function updateCalculator() {
